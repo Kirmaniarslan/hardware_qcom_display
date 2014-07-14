@@ -26,6 +26,10 @@ LOCAL_SHARED_LIBRARIES        += libqdutils libGLESv1_CM
 LOCAL_CFLAGS                  := $(common_flags) -DLOG_TAG=\"gralloc\"
 LOCAL_ADDITIONAL_DEPENDENCIES := $(common_deps)
 LOCAL_SRC_FILES               :=  gpu.cpp gralloc.cpp framebuffer.cpp mapper.cpp
+ifeq ($(BOARD_USES_PMEM_ADSP),true)
+    LOCAL_SRC_FILES           += pmemalloc.cpp
+    LOCAL_CFLAGS              += -DUSE_PMEM_ADSP
+endif
 include $(BUILD_SHARED_LIBRARY)
 
 #MemAlloc Library
