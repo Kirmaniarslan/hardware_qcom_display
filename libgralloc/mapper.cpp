@@ -82,26 +82,6 @@ static int gralloc_map(gralloc_module_t const* module,
             return -errno;
         }
         hnd->base = intptr_t(mappedAddress) + hnd->offset;
-        //LOGD("gralloc_map() succeeded fd=%d, off=%d, size=%d, vaddr=%p",
-        //        hnd->fd, hnd->offset, hnd->size, mappedAddress);
-        mappedAddress = MAP_FAILED;
-        size = ROUND_UP_PAGESIZE(sizeof(MetaData_t));
-        err = memalloc->map_buffer(&mappedAddress, size,
-                                       hnd->offset_metadata, hnd->fd_metadata);
-        if(err) {
-            ALOGE("Could not mmap handle %p, fd=%d (%s)",
-                  handle, hnd->fd_metadata, strerror(errno));
-            hnd->base_metadata = 0;
-            return -errno;
-        }
-
-        if (mappedAddress == MAP_FAILED) {
-            ALOGE("Could not mmap handle %p, fd=%d (%s)",
-                  handle, hnd->fd_metadata, strerror(errno));
-            hnd->base_metadata = 0;
-            return -errno;
-        }
-        hnd->base_metadata = intptr_t(mappedAddress) + hnd->offset_metadata;
     }
     *vaddr = (void*)hnd->base;
     return 0;
