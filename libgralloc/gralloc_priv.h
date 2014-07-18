@@ -86,8 +86,8 @@ enum {
      * The flags need to be around to compile certain HALs which have
      * not cleaned up the code
      */
-    GRALLOC_USAGE_PRIVATE_ADSP_HEAP       =       0x0,
-    GRALLOC_USAGE_PRIVATE_SMI_HEAP        =       0x0,
+    //GRALLOC_USAGE_PRIVATE_ADSP_HEAP       =       0x0,
+    //GRALLOC_USAGE_PRIVATE_SMI_HEAP        =       0x0,
 };
 
 enum {
